@@ -7,6 +7,8 @@ import HttpReveal from "../components/HttpReveal";
 import RequestSandbox from "../components/RequestSandbox";
 import SerializeReveal from "../components/SerializeReveal";
 import SerializeSandbox from "../components/SerializeSandbox";
+import ApiReveal from "../components/ApiReveal";
+import RestSandbox from "../components/RestSandbox";
 
 const code = `// A backend is just code that answers requests
 function handleRequest(req) {
@@ -191,6 +193,64 @@ const serializeSteps = [
   },
 ];
 
+const apiSteps = [
+  {
+    pill: "Step 1",
+    title: "An API is a menu",
+    dot: "bg-[#f27f9f]",
+    text: (
+      <>
+        An <b>API</b> (Application Programming Interface) is the list of things a server lets other programs ask for.
+        Like a restaurant menu: you order from it, you don&apos;t walk into the kitchen.
+      </>
+    ),
+  },
+  {
+    pill: "Step 2",
+    title: "The kitchen stays hidden",
+    dot: "bg-[#f27f9f]",
+    text: (
+      <>
+        Your app only sees the API. The server code and the database behind it can change completely, and nothing on
+        the client breaks, as long as the menu stays the same.
+      </>
+    ),
+  },
+  {
+    pill: "Step 3",
+    title: "REST: URLs are things",
+    dot: "bg-[#f27f9f]",
+    text: (
+      <>
+        <b>REST</b> is a set of habits for designing APIs. Rule one: every URL names a <b>resource</b>, a noun.{" "}
+        <span className="inline-code">/users</span> is all users, <span className="inline-code">/users/1</span> is one.
+      </>
+    ),
+  },
+  {
+    pill: "Step 4",
+    title: "HTTP verbs are the actions",
+    dot: "bg-[#f27f9f]",
+    text: (
+      <>
+        Rule two: the <b>method</b> says what to do. GET reads, POST creates, PUT updates, DELETE removes. Same URL,
+        different verb, different action.
+      </>
+    ),
+  },
+  {
+    pill: "Step 5",
+    title: "Stateless, JSON, predictable",
+    dot: "bg-amber",
+    text: (
+      <>
+        Every request carries everything the server needs; it <b>remembers nothing</b> between calls. Data goes in and
+        out as JSON, so once you learn one REST API, you can use them all.
+      </>
+    ),
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -304,6 +364,28 @@ export default function Home() {
             <div className="mt-20">
               <p className="mb-6 text-3xl leading-snug text-ink/80">Now try it yourself:</p>
               <SerializeSandbox />
+            </div>
+          </div>
+        </section>
+        <section id="apis-rest" className="border-b-2 border-ink bg-[#fdf1f4] px-8 py-24">
+          <div className="mx-auto max-w-[1100px]">
+            <span className="inline-block rounded-lg border-[3px] border-ink bg-[#f27f9f] px-4 py-1.5 font-mono text-xl font-bold text-[#5a1430]">
+              Chapter 04
+            </span>
+            <h2 className="mt-6 font-display text-6xl font-extrabold md:text-8xl">APIs &amp; REST</h2>
+            <p className="mt-6 max-w-[900px] text-3xl leading-snug text-ink/80">
+              The menu a backend offers to the world, and the habits that make every menu feel familiar.
+            </p>
+
+            <div className="mt-12">
+              <ApiReveal steps={apiSteps} />
+            </div>
+
+            <div className="mt-20">
+              <p className="mb-6 text-3xl leading-snug text-ink/80">
+                Now use a real-feeling REST API. Watch the database change:
+              </p>
+              <RestSandbox />
             </div>
           </div>
         </section>
