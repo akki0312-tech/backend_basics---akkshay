@@ -9,6 +9,8 @@ import SerializeReveal from "../components/SerializeReveal";
 import SerializeSandbox from "../components/SerializeSandbox";
 import ApiReveal from "../components/ApiReveal";
 import RestSandbox from "../components/RestSandbox";
+import RoutingReveal from "../components/RoutingReveal";
+import RouteBuilder from "../components/RouteBuilder";
 
 const code = `// A backend is just code that answers requests
 function handleRequest(req) {
@@ -251,6 +253,64 @@ const apiSteps = [
   },
 ];
 
+const routingSteps = [
+  {
+    pill: "Step 1",
+    title: "Many URLs, one server",
+    dot: "bg-amber",
+    text: (
+      <>
+        Your backend is one program, but it has to answer <b>lots of different URLs</b>. Every request arrives at the
+        same front door.
+      </>
+    ),
+  },
+  {
+    pill: "Step 2",
+    title: "The router picks a match",
+    dot: "bg-amber",
+    text: (
+      <>
+        The <b>router</b> reads the request&apos;s <b>method + path</b> and looks for a matching entry in its list of
+        routes.
+      </>
+    ),
+  },
+  {
+    pill: "Step 3",
+    title: "Each route points to a handler",
+    dot: "bg-amber",
+    text: (
+      <>
+        A <b>route</b> is a method + path pair. Each one is wired to a <b>handler</b>, the function that does the work.
+        Each route is an <b>endpoint</b> of your API.
+      </>
+    ),
+  },
+  {
+    pill: "Step 4",
+    title: "Paths can have variables",
+    dot: "bg-amber",
+    text: (
+      <>
+        <span className="inline-code">/users/:id</span> matches <span className="inline-code">/users/42</span> and
+        captures <span className="inline-code">id = 42</span> for the handler. One route, endless users.
+      </>
+    ),
+  },
+  {
+    pill: "Step 5",
+    title: "No match? 404",
+    dot: "bg-[#ef7370]",
+    text: (
+      <>
+        If nothing matches, the router answers <b>404 Not Found</b>. If the path exists but the method doesn&apos;t, it
+        answers <b>405 Method Not Allowed</b>.
+      </>
+    ),
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -386,6 +446,28 @@ export default function Home() {
                 Now use a real-feeling REST API. Watch the database change:
               </p>
               <RestSandbox />
+            </div>
+          </div>
+        </section>
+        <section id="routing" className="border-b-2 border-ink bg-[#fff7e6] px-8 py-24">
+          <div className="mx-auto max-w-[1100px]">
+            <span className="inline-block rounded-lg border-[3px] border-ink bg-[#f5b942] px-4 py-1.5 font-mono text-xl font-bold text-[#4a3000]">
+              Chapter 05
+            </span>
+            <h2 className="mt-6 font-display text-6xl font-extrabold md:text-8xl">Routing &amp; Endpoints</h2>
+            <p className="mt-6 max-w-[900px] text-3xl leading-snug text-ink/80">
+              How one server decides which code answers which URL.
+            </p>
+
+            <div className="mt-12">
+              <RoutingReveal steps={routingSteps} />
+            </div>
+
+            <div className="mt-20">
+              <p className="mb-6 text-3xl leading-snug text-ink/80">
+                Be the backend developer: add routes, then send requests at them.
+              </p>
+              <RouteBuilder />
             </div>
           </div>
         </section>
