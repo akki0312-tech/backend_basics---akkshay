@@ -5,6 +5,8 @@ import CodeBlock from "../components/CodeBlock";
 import Reveal from "../components/Reveal";
 import HttpReveal from "../components/HttpReveal";
 import RequestSandbox from "../components/RequestSandbox";
+import SerializeReveal from "../components/SerializeReveal";
+import SerializeSandbox from "../components/SerializeSandbox";
 
 const code = `// A backend is just code that answers requests
 function handleRequest(req) {
@@ -131,6 +133,64 @@ const httpSteps = [
   },
 ];
 
+const serializeSteps = [
+  {
+    pill: "Step 1",
+    title: "Your data lives as an object",
+    dot: "bg-[#8b5cd6]",
+    text: (
+      <>
+        Inside a running program, data is an <b>object</b> in memory: fields, arrays, nested values. Great for your
+        code, but it can&apos;t leave the program as it is.
+      </>
+    ),
+  },
+  {
+    pill: "Step 2",
+    title: "Serialize: turn it into text",
+    dot: "bg-[#8b5cd6]",
+    text: (
+      <>
+        <b>Serializing</b> flattens the object into a plain <b>string</b> in a standard format. In JavaScript that&apos;s{" "}
+        <span className="inline-code">JSON.stringify()</span>.
+      </>
+    ),
+  },
+  {
+    pill: "Step 3",
+    title: "Text can travel anywhere",
+    dot: "bg-[#8b5cd6]",
+    text: (
+      <>
+        Networks only carry bytes, and a string is easy bytes. The text goes into the HTTP <b>body</b> and crosses the
+        internet, even to a server written in a different language.
+      </>
+    ),
+  },
+  {
+    pill: "Step 4",
+    title: "Deserialize: rebuild the object",
+    dot: "bg-[#8b5cd6]",
+    text: (
+      <>
+        The receiver runs <span className="inline-code">JSON.parse()</span> to turn the text back into a real object it
+        can use. That&apos;s <b>deserializing</b>.
+      </>
+    ),
+  },
+  {
+    pill: "Step 5",
+    title: "Not everything survives the trip",
+    dot: "bg-amber",
+    text: (
+      <>
+        JSON only holds data. <b>Functions</b> and <b>undefined</b> are dropped, and a <b>Date</b> becomes a plain
+        string. Try it below.
+      </>
+    ),
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -224,6 +284,26 @@ export default function Home() {
             <div className="mt-20">
               <p className="mb-6 text-3xl leading-snug text-ink/80">Now you&apos;re the client. Pick a request and send it:</p>
               <RequestSandbox />
+            </div>
+          </div>
+        </section>
+        <section id="serialization" className="border-b-2 border-ink bg-[#f5f2fd] px-8 py-24">
+          <div className="mx-auto max-w-[1100px]">
+            <span className="inline-block rounded-lg border-[3px] border-ink bg-[#8b5cd6] px-4 py-1.5 font-mono text-xl font-bold text-[#2a1050]">
+              Chapter 03
+            </span>
+            <h2 className="mt-6 font-display text-6xl font-extrabold md:text-8xl">Serialization</h2>
+            <p className="mt-6 max-w-[900px] text-3xl leading-snug text-ink/80">
+              Objects can&apos;t travel over a network, text can. Here&apos;s how data crosses the gap and comes back.
+            </p>
+
+            <div className="mt-12">
+              <SerializeReveal steps={serializeSteps} />
+            </div>
+
+            <div className="mt-20">
+              <p className="mb-6 text-3xl leading-snug text-ink/80">Now try it yourself:</p>
+              <SerializeSandbox />
             </div>
           </div>
         </section>
